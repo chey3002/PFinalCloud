@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     try {
       const user = await this.authSvc.login(email, password);
       if (user) {
-        this.router.navigate(['/game']);
+        this.router.navigate(['/home']);
       }
     } catch (error) {
       console.log(error);
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     try {
       const user = await this.authSvc.loginGoogle();
       if (user) {
-        this.router.navigate(['/game']);
+        this.router.navigate(['/home']);
       }
     } catch (error) {
       console.log(error);

@@ -1,7 +1,31 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <h1>Holo ^-^</h1>
-    </div>
-  </div>
-</div>
+<ul
+  class="navbar-nav mx-auto text-center"
+  *ngIf="user$ | async as user; else login"
+>
+  <li>
+    <button class="btn btn-block btn-large btn-primary mt-3">
+      Opción 1
+    </button>
+    <button class="btn btn-block btn-large btn-primary">
+      Opción 2
+    </button>
+    <button class="btn btn-block btn-large btn-primary">
+      Opción 3
+    </button>
+    <button class="btn btn-block btn-large btn-primary">
+      Opción 4
+    </button>
+  </li>
+</ul>
+<ng-template #login>
+  <ul class="navbar-nav mx-auto text-center mt-3">
+    <li>
+      <h1>Es necesario iniciar sesión para poder jugar</h1>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link btn btn-block btn-primary" [routerLink]="['/login']"
+        >Login</a
+      >
+    </li>
+  </ul>
+</ng-template>
