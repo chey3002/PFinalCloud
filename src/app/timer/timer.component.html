@@ -1,0 +1,16 @@
+<div class="container">
+  <section class="timer-counter-label">
+    <div *ngIf="counter; else elseBlock" class="timesetter">
+      <h3 class="clockFont">{{ ttshow }} s</h3>
+    </div>
+    <ng-template #elseBlock
+      ><div class="timesetter"><h3 class="clockFont">0.0 s</h3></div>
+    </ng-template>
+  </section>
+  <section class="timer-button-container">
+    <button class="btn btn-lg btn-primary" (click)="startTimer()">
+      {{ startText }}
+    </button>
+    <button class="btn btn-lg btn-primary" (click)="clearTimer()">❌</button>
+  </section>
+</div>
