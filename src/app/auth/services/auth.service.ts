@@ -42,4 +42,11 @@ export class AuthService {
   getCurrentUser() {
     return this.afAuth.authState.pipe(first()).toPromise();
   }
+  async loginGoogle() {
+    try {
+      return this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

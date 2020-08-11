@@ -27,4 +27,14 @@ export class LoginComponent implements OnInit {
       console.log(error);
     }
   }
+  async onGoogleLogin() {
+    try {
+      const user = await this.authSvc.loginGoogle();
+      if (user) {
+        this.router.navigate(['/game']);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
