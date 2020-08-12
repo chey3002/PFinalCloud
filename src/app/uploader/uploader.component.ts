@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'uploader',
@@ -7,7 +8,9 @@ import { Component } from '@angular/core';
 })
 export class UploaderComponent {
   isHovering: boolean;
-
+  UrlForm = new FormGroup({
+    url: new FormControl(''),
+  });
   files: File[] = [];
 
   toggleHover(event: boolean) {

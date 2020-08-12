@@ -8,6 +8,21 @@
   <h3>AngularFire Drop Zone</h3>
   <p>Drag and Drop a File</p>
 </div>
+<div class="row">
+  <div class="col-md-6 mx-auto mt-5">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="UrlForm">
+          <label for="URL">URL</label>
+          <input type="text" class="form-control" formControlName="url" />
+          <button class="btn btn-large btn-block btn-primary mt-3">
+            Enviar URL
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <h2 class="text-center">Uploads</h2>
 
