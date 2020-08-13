@@ -17,12 +17,17 @@ export class UploaderComponent{
   
   public objeto = {};
   public resultado:any;
-  public urlAnimal = 'https://www.ngenespanol.com/wp-content/uploads/2018/08/%C2%BFCu%C3%A1ntos-a%C3%B1os-vive-un-caballo-770x413.jpg'
+  public urlAnimal: string;
   
   constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(){
 
+     
+
+  };
+
+  sendURL(){
     // Crear el objeto que se enviara al servidor
     this.objeto = {
       "URL" : this.urlAnimal
@@ -30,9 +35,8 @@ export class UploaderComponent{
     // LLevar ese objeto al servidor - Este metodo se impleneto en rest.service.ts
     console.log(this.objeto)
 
-    this.AnimalSearchFunction();    
-
-  }
+    this.AnimalSearchFunction();   
+  };
 
   uploadListener($event: any): void { 
 
