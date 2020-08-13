@@ -4,8 +4,8 @@
       <div class="card-body">
         <form [formGroup]="UrlForm">
           <label for="URL">URL</label>
-          <input type="text" class="form-control" formControlName="url" />
-          <button class="btn btn-large btn-block btn-primary mt-3">
+          <input type="text" class="form-control" formControlName="url" [(ngModel)]="urlAnimal" />
+          <button class="btn btn-large btn-block btn-primary mt-3" (click)="sendURL()">
             Enviar URL
           </button>
         </form>

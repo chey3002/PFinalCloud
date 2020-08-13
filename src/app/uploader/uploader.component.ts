@@ -1,13 +1,61 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { RestService } from 'rest.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'uploader',
   templateUrl: './uploader.component.html',
   styleUrls: ['./uploader.component.scss'],
 })
-export class UploaderComponent {
+
+
+export class UploaderComponent{
+  
   isHovering: boolean;
+  
+  public objeto = {};
+  public descripcion = 'Caballo'
+  public resultado:any;
+  public urlAnimal: string;
+  
+  constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) { }
+
+  ngOnInit(){
+  };
+
+  sendURL(){
+    // Crear el objeto que se enviara al servidor
+    this.objeto = {
+      "URL" : this.urlAnimal
+    };
+    // LLevar ese objeto al servidor - Este metodo se impleneto en rest.service.ts
+    console.log(this.objeto)
+
+    this.AnimalSearchFunction();   
+  };
+
+  uploadListener($event: any): void { 
+
+  }
+
+
+  AnimalSearchFunction() {
+      this.rest.AnimalSearch(this.objeto).subscribe((result) => {
+        this.resultado = result
+        if ( this.resultado['name'] == this.descripcion ){
+          alert('Imagen Correcta')
+        }else[
+          alert('Imagen Incorrecta, por favor intente de nuevo')
+        ]
+        console.log()
+      }, (err) => {
+        console.log("ERROR")
+        console.log(err);
+      });
+  };
+
   UrlForm = new FormGroup({
     url: new FormControl(''),
   });
