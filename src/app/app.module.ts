@@ -8,10 +8,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { DropzoneDirective } from './dropzone.directive';
-import { UploaderComponent } from './uploader/uploader.component';
-import { UploadTaskComponent } from './upload-task/upload-task.component';
-import { TimerComponent } from './timer/timer.component';
+
 import { NavbarComponent } from './navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RestService } from '../../rest.service';
@@ -38,17 +35,9 @@ const config = {
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  declarations: [
-    AppComponent,
-    DropzoneDirective,
-    UploaderComponent,
-    UploadTaskComponent,
-    TimerComponent,
-    NavbarComponent,
-    RankingComponentComponent,
-  ],
+  declarations: [AppComponent, NavbarComponent],
   providers: [RestService],
   bootstrap: [AppComponent],
 })
