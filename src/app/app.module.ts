@@ -15,6 +15,7 @@ import { TimerComponent } from './timer/timer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RestService } from '../../rest.service';
+import { RankingComponentComponent } from './ranking-component/ranking-component.component';
 // 2. Add your credentials from step 1
 const config = {
   apiKey: 'AIzaSyAyfWbGONbdJxrSwAZ7bwTfplA2jt20WJ4',
@@ -46,6 +47,7 @@ const config = {
     UploadTaskComponent,
     TimerComponent,
     NavbarComponent,
+    RankingComponentComponent,
   ],
   providers: [RestService],
   bootstrap: [AppComponent],
