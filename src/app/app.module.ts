@@ -8,10 +8,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { DropzoneDirective } from './dropzone.directive';
-import { UploaderComponent } from './uploader/uploader.component';
-import { UploadTaskComponent } from './upload-task/upload-task.component';
-import { TimerComponent } from './timer/timer.component';
+
 import { NavbarComponent } from './navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 // 2. Add your credentials from step 1
@@ -37,14 +34,7 @@ const config = {
     AngularFireStorageModule, // storage
     ReactiveFormsModule,
   ],
-  declarations: [
-    AppComponent,
-    DropzoneDirective,
-    UploaderComponent,
-    UploadTaskComponent,
-    TimerComponent,
-    NavbarComponent,
-  ],
+  declarations: [AppComponent, NavbarComponent],
   providers: [],
   bootstrap: [AppComponent],
 })
