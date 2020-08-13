@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // 1. Import the libs you need
@@ -14,6 +14,7 @@ import { UploadTaskComponent } from './upload-task/upload-task.component';
 import { TimerComponent } from './timer/timer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RestService } from '../../rest.service';
 // 2. Add your credentials from step 1
 const config = {
   apiKey: 'AIzaSyAyfWbGONbdJxrSwAZ7bwTfplA2jt20WJ4',
@@ -36,6 +37,7 @@ const config = {
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
     ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
@@ -45,7 +47,7 @@ const config = {
     TimerComponent,
     NavbarComponent,
   ],
-  providers: [],
+  providers: [RestService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
