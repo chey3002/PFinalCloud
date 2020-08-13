@@ -13,6 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RestService } from '../../rest.service';
 import { RankingComponentComponent } from './ranking-component/ranking-component.component';
+
 // 2. Add your credentials from step 1
 const config = {
   apiKey: 'AIzaSyAyfWbGONbdJxrSwAZ7bwTfplA2jt20WJ4',
@@ -35,8 +36,9 @@ const config = {
     AngularFireAuthModule, // auth
     AngularFireStorageModule, // storage
     ReactiveFormsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
+  exports : [],
   declarations: [AppComponent, NavbarComponent],
   providers: [RestService],
   bootstrap: [AppComponent],

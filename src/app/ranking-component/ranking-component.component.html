@@ -1,1 +1,17 @@
-<p>ranking-component works!</p>
+<h1>Ranking</h1>
+<table>
+    <thead>
+        <th>Usuario</th>
+        <th>Tiempo</th>
+        <th>Fecha</th>
+        <th>Animal</th>
+    </thead>
+
+    <tbody>
+        <tr *ngFor = 'let record of records; let i = index;'>
+            <td><span>{{record.username}}</span></td>
+            <td><span>{{record.time}}</span></td>
+            <td><span>{{record.date}}</span></td>
+            <td><span>{{record.animalGame}}</span></td>
+    </tbody>
+</table>

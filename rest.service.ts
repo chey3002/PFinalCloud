@@ -7,7 +7,7 @@ import { map, catchError, tap } from 'rxjs/operators';
 
 
 const endpoint = 'https://animalswebapi.azurewebsites.net/'; // Servicio de imagenes 
-const endpoint2 = 'https://rankingwebapi.azurewebsites.net'; // Servicio de rannking 
+const endpoint2 = 'https://rankingwebapi.azurewebsites.net/'; // Servicio de rannking 
 
 
   const httpOptions = {
@@ -29,10 +29,6 @@ export class RestService {
   }
 
   // Funciones de  consumo del servicio de imagenes
-  getAnimal(): Observable<any> {
-    return this.http.get(endpoint + 'Animals/ClassifyAnimalByURL').pipe(
-      map(this.extractData));
-  }
 
   AnimalSearch (search): Observable<any> {
     console.log(search);
@@ -44,13 +40,17 @@ export class RestService {
 
   //Servicio de consumo de servicios de ranking 
 
-  RankingSearch (search): Observable<any> {
-    console.log(search);
-    return this.http.post<any>(endpoint2 + 'Ranking/GetTopRanking?Top=5', JSON.stringify(search), httpOptions).pipe(
+  getRanking(): Observable<any> {
+    return this.http.get(endpoint2 + 'Ranking/GetTopRanking?Top=10').pipe(
+      map(this.extractData));
+  }
+  /*
+  RankingSearch (): Observable<any> {
+    return this.http.post<any>(endpoint2 + 'Ranking/GetTopRanking?Top=1', httpOptions).pipe(
       tap((search) => console.log(`Blind Search w/ id=${search.id}`)),
       catchError(this.handleError<any>('Blind Search'))
     );
-  }
+  }*/
 
 
   private handleError<T> (operation = 'operation', result?: T) {
