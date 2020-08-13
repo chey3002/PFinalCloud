@@ -16,15 +16,13 @@ export class UploaderComponent{
   isHovering: boolean;
   
   public objeto = {};
+  public descripcion = 'Caballo'
   public resultado:any;
   public urlAnimal: string;
   
   constructor(public rest:RestService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(){
-
-     
-
   };
 
   sendURL(){
@@ -46,7 +44,12 @@ export class UploaderComponent{
   AnimalSearchFunction() {
       this.rest.AnimalSearch(this.objeto).subscribe((result) => {
         this.resultado = result
-        console.log(this.resultado)
+        if ( this.resultado['name'] == this.descripcion ){
+          alert('Imagen Correcta')
+        }else[
+          alert('Imagen Incorrecta, por favor intente de nuevo')
+        ]
+        console.log()
       }, (err) => {
         console.log("ERROR")
         console.log(err);

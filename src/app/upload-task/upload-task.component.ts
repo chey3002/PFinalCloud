@@ -24,6 +24,7 @@ export class UploadTaskComponent implements OnInit {
   downloadURL: string;
   public resultado;
   public objeto = {};
+  public descripcion = 'Caballo';
 
   constructor(
     private storage: AngularFireStorage,
@@ -73,7 +74,11 @@ export class UploadTaskComponent implements OnInit {
   AnimalSearchFunction() {
     this.rest.AnimalSearch(this.objeto).subscribe((result) => {
       this.resultado = result
-      console.log(this.resultado)
+      if ( this.resultado['name'] == this.descripcion ){
+        alert('Imagen Correcta')
+      }else{
+        alert('Imagen Incorrecta, por favor intente de nuevo')
+     }
     }, (err) => {
       console.log("ERROR")
       console.log(err);
