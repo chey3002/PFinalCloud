@@ -46,10 +46,9 @@ export class UploaderComponent{
         this.resultado = result
         if ( this.resultado['name'] == this.descripcion ){
           alert('Imagen Correcta')
-        }else[
+        }else{
           alert('Imagen Incorrecta, por favor intente de nuevo')
-        ]
-        console.log()
+       }
       }, (err) => {
         console.log("ERROR")
         console.log(err);

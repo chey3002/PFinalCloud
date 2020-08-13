@@ -44,6 +44,13 @@ export class RestService {
 
   //Servicio de consumo de servicios de ranking 
 
+  RankingSearch (search): Observable<any> {
+    console.log(search);
+    return this.http.post<any>(endpoint2 + 'Ranking/GetTopRanking?Top=5', JSON.stringify(search), httpOptions).pipe(
+      tap((search) => console.log(`Blind Search w/ id=${search.id}`)),
+      catchError(this.handleError<any>('Blind Search'))
+    );
+  }
 
 
   private handleError<T> (operation = 'operation', result?: T) {
