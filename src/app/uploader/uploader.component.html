@@ -1,11 +1,19 @@
 <div class="row">
-  <div class="col-md-6 mx-auto mt-5">
+  <div class="col-md-12 mx-auto m-5">
     <div class="card">
       <div class="card-body">
         <form [formGroup]="UrlForm">
           <label for="URL">URL</label>
-          <input type="text" class="form-control" formControlName="url" [(ngModel)]="urlAnimal" />
-          <button class="btn btn-large btn-block btn-primary mt-3" (click)="sendURL()">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="url"
+            [(ngModel)]="urlAnimal"
+          />
+          <button
+            class="btn btn-large btn-block btn-primary mt-3"
+            (click)="sendURL()"
+          >
             Enviar URL
           </button>
         </form>
@@ -14,7 +22,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-6 mx-auto mt-5">
+  <div class="col-md-12 mx-auto m-5">
     <div class="card">
       <div class="card-body">
         <div
@@ -24,7 +32,8 @@
           (dropped)="onDrop($event)"
           [class.hovering]="isHovering"
         >
-          <h3>Suba la imagen de un: Animal</h3>
+          <h3>Suba la imagen de un:</h3>
+          <h1>Caballo</h1>
           <p>Arrastre la imagen aquí</p>
         </div>
       </div>
