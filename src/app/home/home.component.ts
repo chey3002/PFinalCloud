@@ -12,16 +12,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   public user$: Observable<any> = this.authSvc.afAuth.user;
 
-  public resultado;
-
+ 
   constructor(private authSvc: AuthService , public rest:RestService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.TopSearchFunction();
+    
   }
 
-  TopSearchFunction() {
-    this.rest.soapAnimals()
-};
+ 
 
 }

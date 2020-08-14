@@ -61,7 +61,7 @@ export class RestService {
   // Reglas del juego
   
   
-   soapAnimals() {
+   soapAnimals(){
 
     const promesa = new Promise((res , rej) => {
     var str = `<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetReglas xmlns="http://Microsoft.ServiceModel.Samples" /></s:Body></s:Envelope>`
@@ -81,9 +81,7 @@ export class RestService {
   });
 
 
-  promesa.then ((res) => {
-    return JSON.stringify(this.xmlToJson(res))
-  })
+  return promesa
 
   }
   xmlToJson(xml) {
