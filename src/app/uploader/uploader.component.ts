@@ -6,6 +6,7 @@ import { AuthService } from './../auth/services/auth.service';
 import { Observable } from 'rxjs';
 import { DataService } from '../services/data.service';
 import { DatePipe } from '@angular/common';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'uploader',
@@ -72,7 +73,7 @@ export class UploaderComponent{
           //this.date = this.datePipe.transform(this.myDate, 'yyyy-MM-dd')
           this.date = this.datePipe.transform(this.myDate, 'yyyy-MM-ddTHH:mm:ss') + 'Z';
           //this.date = '2020-08-12T20:00:00Z';
-          this.animal = "Caballo";
+          this.animal = this.descripcion;
           this.ranking = {
             'username': this.userName,
             'time': this.time,
@@ -138,7 +139,9 @@ export class UploaderComponent{
       console.log(this.categorias)
       this.index = parseInt(this.getRandomArbitrary( 0 , this.animales.length - 1))
       console.log(this.index)
-      this.value = this.animales[this.index]
+      this.value = this.animales[this.index].replace(/[^a-zA-Z ]/g, "")
+      this.dataService.valueAnimal = this.value
+      this.descripcion = this.value
       console.log(this.value)
    })
   };

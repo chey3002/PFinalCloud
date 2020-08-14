@@ -54,6 +54,7 @@ export class UploadTaskComponent implements OnInit {
   }
 
   startUpload() {
+    this.descripcion = this.dataService.valueAnimal
     // The storage path
     const path = `test/${Date.now()}_${this.file.name}`;
     // Reference to storage bucket
@@ -96,7 +97,7 @@ export class UploadTaskComponent implements OnInit {
         this.time = parseFloat(this.dataService.time);
         //this.date = this.datePipe.transform(this.myDate, 'yyyy-MM-dd')
         this.date = this.datePipe.transform(this.myDate, 'yyyy-MM-ddTHH:mm:ss') + 'Z';
-        this.animal = "Caballo";
+        this.animal = this.descripcion;
         this.ranking = {
           'Username': this.userName,
           'Time':this.time,

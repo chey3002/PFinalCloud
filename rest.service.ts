@@ -36,11 +36,8 @@ export class RestService {
     console.log(search);
     return this.http.post<any>(endpoint + 'Animals/ClassifyAnimalByURL', JSON.stringify(search), httpOptions).pipe(
       tap((search) => console.log(`Blind Search w/ id=${search.id}`)),
-      catchError(this.handleError<any>('Blind Search'))
+      //catchError(this.handleError<any>('Blind Search'))
     );
-  }
-  handleError<T>(arg0: string): (err: any, caught: Observable<any>) => import("rxjs").ObservableInput<any> {
-    throw new Error("Method not implemented.");
   }
 
   //Servicio de consumo de servicios de ranking 
@@ -54,7 +51,7 @@ export class RestService {
     console.log(search);
     return this.http.post<any>(endpoint2 + 'Ranking/InsertPosition', JSON.stringify(search), httpOptions).pipe(
       tap((search) => console.log(`Blind Search w/ id=${search.id}`)),
-      catchError(this.handleError<any>('Blind Search'))
+      //catchError(this.handleError<any>('Blind Search'))
     );
   }
 
