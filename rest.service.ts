@@ -39,6 +39,9 @@ export class RestService {
       catchError(this.handleError<any>('Blind Search'))
     );
   }
+  handleError<T>(arg0: string): (err: any, caught: Observable<any>) => import("rxjs").ObservableInput<any> {
+    throw new Error("Method not implemented.");
+  }
 
   //Servicio de consumo de servicios de ranking 
 
@@ -57,82 +60,72 @@ export class RestService {
 
   // Reglas del juego
   
-
+  
    soapAnimals() {
+
+    const promesa = new Promise((res , rej) => {
     var str = `<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetReglas xmlns="http://Microsoft.ServiceModel.Samples" /></s:Body></s:Envelope>`
     var symbol = "MSFT"; 
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("POST", "https://ruleswebservice.azurewebsites.net/Service1.svc",true);
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4) {
-             xmlhttp.responseText;
-            
-            //var json = XMLObjectifier.xmlToJSON(xmlhttp.responseXML);
-            //console.log(json)
-            //var result = json.Body[0].GetQuoteResponse[0].GetQuoteResult[0].Text;
-            // Result text is escaped XML string, convert string to XML object then convert to JSON object
-            //son = XMLObjectifier.xmlToJSON(XMLObjectifier.textToXML(result));
-            //alert(symbol + ' Stock Quote: $' + json.Stock[0].Last[0].Text); 
+            console.log("si entro ?")
+            res(xmlhttp.responseXML)
         }
     }
-
     xmlhttp.setRequestHeader("SOAPAction", "http://Microsoft.ServiceModel.Samples/IService1/GetReglas");
     xmlhttp.setRequestHeader("Content-Type", "text/xml");
-    console.log(xmlhttp.responseText.valueOf)
     var xml = str;
     xmlhttp.send(xml);
-    
+  });
+
+
+  promesa.then ((res) => {
+    return JSON.stringify(this.xmlToJson(res))
+  })
+
   }
-  xml2json(xml) {
-    try {
-      var obj = {};
-      if (xml.children.length > 0) {
-        for (var i = 0; i < xml.children.length; i++) {
-          var item = xml.children.item(i);
-          var nodeName = item.nodeName;
-  
-          if (typeof (obj[nodeName]) == "undefined") {
-            obj[nodeName] = this.xml2json(item);
-          } else {
-            if (typeof (obj[nodeName].Push) == "undefined") {
-              var old = obj[nodeName];
-  
-              obj[nodeName] = [];
-              obj[nodeName].Push(old);
-            }
-            obj[nodeName].Push(this.xml2json(item));
-          }
-        }
-      } else {
-        obj = xml.textContent;
-      }
-      return obj;
-    } catch (e) {
-        console.log(e.message);
+  xmlToJson(xml) {
+    var obj = {};
+    if (4 === xml.nodeType) {
+        obj = xml.nodeValue;
     }
-  }
+
+    if (xml.hasChildNodes()) {
+        for (var i = 0; i < xml.childNodes.length; i++) {
+            var TEXT_NODE_TYPE_NAME = '#text',
+                item = xml.childNodes.item(i),
+                nodeName = item.nodeName,
+                content;
+
+            if (TEXT_NODE_TYPE_NAME === nodeName) {
+                if ((null === xml.nextSibling) || (xml.localName !== xml.nextSibling.localName)) {
+                    content = xml.textContent;
+                } else if (xml.localName === xml.nextSibling.localName) {
+                    content = (xml.parentElement.childNodes[0] === xml) ? [xml.textContent] : xml.textContent;
+                }
+                return content;
+            } else {
+                if ('undefined' === typeof(obj[nodeName])) {
+                    obj[nodeName] = this.xmlToJson(item);
+                } else {
+                    if ('undefined' === typeof(obj[nodeName].length)) {
+                        var old = obj[nodeName];
+                        obj[nodeName] = [];
+                        obj[nodeName].push(old);
+                    }
+                    obj[nodeName].push(this.xmlToJson(item));
+                }
+            }
+        }
+    }
+    return obj;
+}
+
+
 
 
   
-
-  /*
-  soapRequest(){
-    var oXmlHttp = new XMLHttpRequest();
-    oXmlHttp.open("POST", "https://ruleswebservice.azurewebsites.net/Service1.svc'", false);
-    oXmlHttp.setRequestHeader("Content-Type", "text/xml");
-    oXmlHttp.setRequestHeader("SOAPAction", "http://Microsoft.ServiceModel.Samples/IService1/GetReglas");
-    oXmlHttp.send(`<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetReglas xmlns="http://Microsoft.ServiceModel.Samples" /></s:Body></s:Envelope>`);
-    console.log(oXmlHttp.responseXML.selectSingleNode())
-    
-  }*/
-
-
-  private handleError<T> (operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error); 
-      console.log(`${operation} failed: ${error.message}`);
-      return of(result as T);
-    };
-  }
 
 }
