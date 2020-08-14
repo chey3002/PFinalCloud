@@ -81,6 +81,7 @@ export class UploaderComponent{
             'animalGame': this.animal
           }
           this.RankingSearchFunction();
+          
         }else{
           alert('Imagen Incorrecta, por favor intente de nuevo')
        }
@@ -94,6 +95,7 @@ export class UploaderComponent{
     this.rest.rankingSearch(this.ranking).subscribe((result2) => {
       this.resultado2 = result2
       console.log(this.resultado2);
+      location.reload();
     }, (err) => {
       console.log(err);
     });

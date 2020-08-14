@@ -9,7 +9,11 @@ import { DataService } from '../services/data.service'
 export class TimerComponent implements OnDestroy {
 
   constructor(public dataService : DataService){
+    
+  }
 
+  ngOnInit(): void {
+    this.startTimer()
   }
   counter: number;
   timerRef;
@@ -25,10 +29,13 @@ export class TimerComponent implements OnDestroy {
       this.timerRef = setInterval(() => {
         this.ttshow = ((Date.now() - startTime) / 1000).toFixed(1);
         this.counter = +this.ttshow;
+        this.dataService.time = this.counter
       });
     } else {
       this.startText = '🔄 ';
-      this.dataService.time = this.ttshow
+      
+      location.reload();
+    
       clearInterval(this.timerRef);
     }
   }

@@ -1,6 +1,8 @@
 import { Component, OnInit , Input } from '@angular/core';
 import { RestService } from 'rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TimerComponent  } from '../timer/timer.component'
+
 
 @Component({
   selector: 'app-game',
