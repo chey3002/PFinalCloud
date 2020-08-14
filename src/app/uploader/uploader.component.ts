@@ -41,6 +41,7 @@ export class UploaderComponent{
   async ngOnInit(){
     this.userName = (await this.authSvc.getCurrentUser()).displayName
     console.log(this.authSvc.getCurrentUser())
+    this.TopSearchFunction();
   };
 
   sendURL(){
@@ -111,4 +112,76 @@ export class UploaderComponent{
       this.files.push(files.item(i));
     }
   }
+
+  
+  public resultado;
+  public pregunta = ''
+
+  public categorias = []
+  public animales = []
+
+  public index;
+  public value;
+
+
+  TopSearchFunction() {
+    this.rest.soapAnimals().then ((res) => {
+      var json = JSON.stringify(this.xmlToJson(res))
+      console.log(json)
+      var aux = json.split('"a:NombreAnimal":').splice(1)
+      for (var i of aux) {
+        var auxI = i.split('"a:NombreCategoria"')
+        this.animales.push(auxI[0])
+        this.categorias.push[auxI[1]]    
+      }
+      console.log(this.animales)
+      console.log(this.categorias)
+      this.index = parseInt(this.getRandomArbitrary( 0 , this.animales.length - 1))
+      console.log(this.index)
+      this.value = this.animales[this.index]
+      console.log(this.value)
+   })
+  };
+
+  xmlToJson(xml) {
+    var obj = {};
+    if (4 === xml.nodeType) {
+        obj = xml.nodeValue;
+    }
+
+    if (xml.hasChildNodes()) {
+        for (var i = 0; i < xml.childNodes.length; i++) {
+            var TEXT_NODE_TYPE_NAME = '#text',
+                item = xml.childNodes.item(i),
+                nodeName = item.nodeName,
+                content;
+
+            if (TEXT_NODE_TYPE_NAME === nodeName) {
+                if ((null === xml.nextSibling) || (xml.localName !== xml.nextSibling.localName)) {
+                    content = xml.textContent;
+                } else if (xml.localName === xml.nextSibling.localName) {
+                    content = (xml.parentElement.childNodes[0] === xml) ? [xml.textContent] : xml.textContent;
+                }
+                return content;
+            } else {
+                if ('undefined' === typeof(obj[nodeName])) {
+                    obj[nodeName] = this.xmlToJson(item);
+                } else {
+                    if ('undefined' === typeof(obj[nodeName].length)) {
+                        var old = obj[nodeName];
+                        obj[nodeName] = [];
+                        obj[nodeName].push(old);
+                    }
+                    obj[nodeName].push(this.xmlToJson(item));
+                }
+            }
+        }
+    }
+    return obj;
+}
+
+getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 }
