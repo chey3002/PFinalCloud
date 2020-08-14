@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy , Output, EventEmitter } from '@angular/core';
+import { DataService } from '../services/data.service'
 
 @Component({
   selector: 'app-timer',
@@ -6,11 +7,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./timer.component.scss'],
 })
 export class TimerComponent implements OnDestroy {
+
+  constructor(public dataService : DataService){
+
+  }
   counter: number;
   timerRef;
   running: boolean = false;
   startText = '🏁';
-  ttshow: String;
+  public ttshow;
 
   startTimer() {
     this.running = !this.running;
@@ -23,6 +28,7 @@ export class TimerComponent implements OnDestroy {
       });
     } else {
       this.startText = '🔄 ';
+      this.dataService.time = this.ttshow
       clearInterval(this.timerRef);
     }
   }

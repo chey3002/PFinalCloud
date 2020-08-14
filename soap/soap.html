@@ -1,0 +1,36 @@
+<html>
+    <title></title>
+    <head>
+        <script type="text/javascript">
+        
+
+            
+            function soap_() {
+                var str = `<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetReglas xmlns="http://Microsoft.ServiceModel.Samples" /></s:Body></s:Envelope>`
+                var symbol = "MSFT"; 
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open("POST", "https://ruleswebservice.azurewebsites.net/Service1.svc",true);
+                xmlhttp.onreadystatechange=function() {
+                    if (xmlhttp.readyState == 4) {
+                        console.log(xmlhttp.responseText);
+
+                        //var json = XMLObjectifier.xmlToJSON(xmlhttp.responseXML);
+                        //console.log(json)
+                        //var result = json.Body[0].GetQuoteResponse[0].GetQuoteResult[0].Text;
+                        // Result text is escaped XML string, convert string to XML object then convert to JSON object
+                        //son = XMLObjectifier.xmlToJSON(XMLObjectifier.textToXML(result));
+                        //alert(symbol + ' Stock Quote: $' + json.Stock[0].Last[0].Text); 
+                    }
+                }
+                xmlhttp.setRequestHeader("SOAPAction", "http://Microsoft.ServiceModel.Samples/IService1/GetReglas");
+                xmlhttp.setRequestHeader("Content-Type", "text/xml");
+                var xml = str;
+                xmlhttp.send(xml);
+                
+            }
+    </script>
+    </head>
+    <body>
+        <input type="button" value="SOAP Request" onclick="soap_();" />
+    </body>
+</html>

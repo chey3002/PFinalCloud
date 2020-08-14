@@ -8,6 +8,7 @@ import { GameRoutingModule } from './game-routing.module';
 import { GameComponent } from './game.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RankingComponentComponent } from '../ranking-component/ranking-component.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -19,5 +20,8 @@ import { RankingComponentComponent } from '../ranking-component/ranking-componen
     RankingComponentComponent
   ],
   imports: [CommonModule, GameRoutingModule, ReactiveFormsModule ],
+  providers : [
+    DatePipe
+  ]
 })
 export class GameModule {}

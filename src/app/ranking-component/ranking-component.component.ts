@@ -19,7 +19,6 @@ export class RankingComponentComponent implements OnInit {
   ngOnInit(): void {
 
     this.TopSearchFunction();
-    
 
   };
 

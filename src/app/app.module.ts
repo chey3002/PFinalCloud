@@ -12,6 +12,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RestService } from '../../rest.service';
+
 import { RankingComponentComponent } from './ranking-component/ranking-component.component';
 
 // 2. Add your credentials from step 1
@@ -39,7 +40,7 @@ const config = {
     HttpClientModule
   ],
   exports : [],
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent ],
   providers: [RestService],
   bootstrap: [AppComponent],
 })

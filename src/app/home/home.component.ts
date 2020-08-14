@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/services/auth.service';
 import { Observable } from 'rxjs';
+import { RestService } from 'rest.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +12,16 @@ import { Observable } from 'rxjs';
 export class HomeComponent implements OnInit {
   public user$: Observable<any> = this.authSvc.afAuth.user;
 
-  constructor(private authSvc: AuthService) {}
+  public resultado;
 
-  ngOnInit(): void {}
+  constructor(private authSvc: AuthService , public rest:RestService, private route: ActivatedRoute, private router: Router) {}
+
+  ngOnInit(): void {
+    this.TopSearchFunction();
+  }
+
+  TopSearchFunction() {
+    this.rest.soapAnimals()
+};
+
 }

@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 import { RestService } from 'rest.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DataService } from '../services/data.service';
+import { AuthService } from './../auth/services/auth.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'upload-task',
@@ -23,20 +26,31 @@ export class UploadTaskComponent implements OnInit {
   snapshot: Observable<any>;
   downloadURL: string;
   public resultado;
+  public resultado2;
   public objeto = {};
+  public userName;
   public descripcion = 'Caballo';
+  public time;
+  public date; 
+  public animal;
+  public ranking = {};
+  public myDate = new Date();
 
   constructor(
     private storage: AngularFireStorage,
     private db: AngularFirestore ,
     public rest:RestService, 
     private route: ActivatedRoute, 
-    private router: Router
+    private router: Router,
+    public dataService : DataService , 
+    private authSvc: AuthService,
+    private datePipe: DatePipe
   ) {}
  
 
-  ngOnInit() {
+  async ngOnInit() {
     this.startUpload();
+    this.userName = (await this.authSvc.getCurrentUser()).displayName
   }
 
   startUpload() {
@@ -61,6 +75,8 @@ export class UploadTaskComponent implements OnInit {
         this.objeto = {
           'URL' : this.downloadURL
         };
+
+        
         
         this.AnimalSearchFunction();
 
@@ -76,6 +92,18 @@ export class UploadTaskComponent implements OnInit {
       this.resultado = result
       if ( this.resultado['name'] == this.descripcion ){
         alert('Imagen Correcta')
+        // Para el cronometro y envia la informacion a la base de datos 
+        this.time = parseFloat(this.dataService.time);
+        //this.date = this.datePipe.transform(this.myDate, 'yyyy-MM-dd')
+        this.date = this.datePipe.transform(this.myDate, 'yyyy-MM-ddTHH:mm:ss') + 'Z';
+        this.animal = "Caballo";
+        this.ranking = {
+          'Username': this.userName,
+          'Time':this.time,
+          'Date': this.date,
+          'AnimalGame': this.animal
+        }
+        this.RankingSearchFunction()
       }else{
         alert('Imagen Incorrecta, por favor intente de nuevo')
      }
@@ -83,6 +111,16 @@ export class UploadTaskComponent implements OnInit {
       console.log("ERROR")
       console.log(err);
     });
+};
+
+RankingSearchFunction() {
+  this.rest.rankingSearch(this.ranking).subscribe((result) => {
+    this.resultado2 = result
+    console.log(this.resultado2);
+  }, (err) => {
+    console.log("ERROR")
+    console.log(err);
+  });
 };
 
   isActive(snapshot) {
