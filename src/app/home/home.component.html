@@ -1,3 +1,9 @@
+<div class="text-center">
+  <img
+    src="https://firebasestorage.googleapis.com/v0/b/hidden-lyceum-163803.appspot.com/o/placeholder.png?alt=media&token=78d95bb6-5e9e-4f5b-84d6-205f345451af"
+    alt="Banner"
+  />
+</div>
 <ul
   class="navbar-nav mx-auto text-center"
   *ngIf="user$ | async as user; else login"
@@ -7,7 +13,10 @@
       <div class="card">
         <div class="card-body">
           <li>
-            <button class="btn btn-block btn-large btn-primary mt-3">
+            <button
+              class="btn btn-block btn-large btn-primary mt-3"
+              [routerLink]="['/game']"
+            >
               Iniciar juego
             </button>
           </li>
